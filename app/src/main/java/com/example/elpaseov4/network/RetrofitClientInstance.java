@@ -21,12 +21,15 @@ public class RetrofitClientInstance{
 
     public static  Retrofit getRetrofitInstance(String authorizationValue) {
         if (retrofit == null) {
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+            httpClient.addInterceptor(new LoggingInterceptor());
+
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(getHeader(authorizationValue))
+                    .client(httpClient.build())
                     .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                     .build();
         }
@@ -46,41 +49,22 @@ public class RetrofitClientInstance{
         return retrofit;
     }
 
-    public static OkHttpClient getHeader(final String authorizationValue ) {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient okClient = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .addNetworkInterceptor(
-                        new Interceptor() {
-                            @Override
-                            public Response intercept(Interceptor.Chain chain) throws IOException {
-                                Request request = null;
-                                if (authorizationValue != null) {
-                                    Log.d("--Authorization-- ", authorizationValue);
+    static class LoggingInterceptor implements Interceptor {
+        @Override public Response intercept(Interceptor.Chain chain) throws IOException {
+            Request request = chain.request();
 
-                                    Request original = chain.request();
-                                    // Request customization: add request headers
-                                    Request.Builder requestBuilder = original.newBuilder()
-                                            .addHeader("Authorization", authorizationValue);
+            long t1 = System.nanoTime();
+           /* Log.info(String.format("Sending request %s on %s%n%s",
+                    request.url(), chain.connection(), request.headers()));
+*/
+            Response response = chain.proceed(request);
 
-                                    request = requestBuilder.build();
-                                }
-                                return chain.proceed(request);
-                            }
-                        })
-                .build();
-        return okClient;
-
-    }
-    public static class AddHeaderInterceptor implements Interceptor {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-
-            Request.Builder builder = chain.request().newBuilder();
-            builder.addHeader("Authorization", "MyauthHeaderContent");
-
-            return chain.proceed(builder.build());
+            long t2 = System.nanoTime();
+            /*logger.info(String.format("Received response for %s in %.1fms%n%s",
+                    response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+*/
+            return response;
         }
     }
+
 }

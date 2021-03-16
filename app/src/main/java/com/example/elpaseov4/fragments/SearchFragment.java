@@ -54,6 +54,7 @@ public class SearchFragment extends Fragment {
     String properties = "[{\"key\": \"categories.id\", \"value\": ? }]";
     String range = "1,20";
     String fieldsTosort = "id,desc";
+
     public SearchFragment() {
         // Required empty public constructor
     }
