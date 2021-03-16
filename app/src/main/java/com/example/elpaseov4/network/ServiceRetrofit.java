@@ -6,6 +6,7 @@ import com.example.elpaseov4.model.Producer;
 import com.example.elpaseov4.model.Product;
 import com.example.elpaseov4.model.User;
 import com.example.elpaseov4.model.UserLogin;
+import com.example.elpaseov4.pojoModel.GeneralPojo;
 
 import java.util.List;
 
@@ -42,6 +43,9 @@ public interface ServiceRetrofit {
             @Query("properties") String properties);
 
     @POST("/api/cart")
-    Call postCart(@Header("Authorization") String token,
-                  @Body String newCart);
+    Call<CartPostResponse> postCart(@Header("Authorization") String token,
+                  @Body CartPost newCart);
+
+    @GET("/api/general/active")
+    Call<NodeGeneral> getGeneralActive();
 }

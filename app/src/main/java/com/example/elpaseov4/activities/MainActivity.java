@@ -27,9 +27,22 @@ import com.example.elpaseov4.fragments.OrderDetailFragment;
 import com.example.elpaseov4.fragments.OrdersFragment;
 import com.example.elpaseov4.fragments.RegisterFragment;
 import com.example.elpaseov4.fragments.SearchFragment;
+import com.example.elpaseov4.model.Product;
 import com.example.elpaseov4.model.User;
+import com.example.elpaseov4.network.CartPost;
+import com.example.elpaseov4.network.CartPostResponse;
+import com.example.elpaseov4.network.NodeGeneral;
+import com.example.elpaseov4.network.RetrofitClientInstance;
 import com.example.elpaseov4.network.ServiceRetrofit;
+import com.example.elpaseov4.pojoModel.CartProductPojo;
+import com.example.elpaseov4.pojoModel.GeneralPojo;
+import com.example.elpaseov4.pojoModel.NodeDatePojo;
+import com.example.elpaseov4.pojoModel.NodePojo;
+import com.example.elpaseov4.pojoModel.ProductPojo;
+import com.example.elpaseov4.pojoModel.UserPojo;
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Node;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +71,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activityMain=this;
-
+        service = RetrofitClientInstance.getRetrofitInstance().create(ServiceRetrofit.class);
+        if (sesion()){
+            System.out.println("entramossssssssssssssssssssssssss");
+            preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            String value = preferences.getString("value",null);
+            service = RetrofitClientInstance.getRetrofitInstance(value).create(ServiceRetrofit.class);
+        }
         inicializarElementos();
 
 
@@ -122,6 +141,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static MainActivity getmInstanceActivityMain(){
         return activityMain;
+    }
+    private boolean sesion(){
+        preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String mail = preferences.getString("value",null);
+        //String mail = "juan pedro";
+        boolean local = false;
+        if (mail != null ){
+            local =  true;
+        }
+        return local;
     }
     private boolean revisarSesion(){
         preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -212,40 +241,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void createCart(){
         String token = preferences.getString("value",null);
-        String body = "{\n" +
-                "    \"cartProducts\": [\n" +
-                "        {\n" +
-                "            \"product\": {\n" +
-                "                \"id\": 2\n" +
-                "            },\n" +
-                "            \"quantity\": 2\n" +
-                "        }\n" +
-                "    ],\n" +
-                "    \"nodeDate\": {\n" +
-                "        \"id\": 8,\n" +
-                "        \"node\": {\n" +
-                "            \"id\": 5\n" +
-                "        }\n" +
-                "    },\n" +
-                "    \"observation\": \"Una observación para el pedido\",\n" +
-                "    \"user\": {\n" +
-                "        \"id\": 617\n" +
-                "    },\n" +
-                "    \"general\": {\n" +
-                "        \"id\": 6\n" +
-                "    }\n" +
-                "}";
-        service.postCart(token,body).enqueue(new Callback() {
+
+        CartPost cartPost = new CartPost();
+        service.getGeneralActive().enqueue(new Callback<NodeGeneral>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                Toast.makeText(getApplicationContext(), "se creo el carro", Toast.LENGTH_LONG).show();
+            public void onResponse(Call<NodeGeneral> call, Response<NodeGeneral> response) {
+                response.body();
+                CartProductPojo local = new CartProductPojo();
+                ProductPojo p1 = new ProductPojo();
+                p1.setId("3");
+                local.setProduct(p1);
+                local.setQuantity("2");
+
+                NodeDatePojo activeNodes = response.body().getActiveNodes().get(0);
+                NodePojo node = activeNodes.getNode();
+                activeNodes.setNode(node);
+                GeneralPojo gp = new GeneralPojo();
+                gp.setId(response.body().getId());
+
+                cartPost.setCartProducts(local);
+                cartPost.setNodeDate(activeNodes);
+                cartPost.setObservation("Purchase by 15");
+                cartPost.setGeneral(gp);
+                UserPojo up= new UserPojo();
+                up.setId("710");
+                cartPost.setUser(up);
+
+                Toast.makeText(getApplicationContext(), "Traje general", Toast.LENGTH_LONG).show();
+                service.postCart("Bearer "+token , cartPost).enqueue(new Callback<CartPostResponse>() {
+                    @Override
+                    public void onResponse(Call<CartPostResponse> call, Response<CartPostResponse> response) {
+                        response.body();
+                        Toast.makeText(getApplicationContext(), "se creo el carro", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CartPostResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No se creo el carro", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "No se creo el carro", Toast.LENGTH_LONG).show();
-
+            public void onFailure(Call<NodeGeneral> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "no traje Geenral", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }
