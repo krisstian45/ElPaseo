@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="30dp"
+               android:text="Busqueda"
+               android:textAlignment="center"
+               android:padding="5dp"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Noticias"
+               android:layout_gravity="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:padding="5dp"/>
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerViewNews"
+               android:scrollbars="vertical"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Nuestros Productores"
+               android:layout_gravity="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:padding="5dp"
+               />
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerViewProducers"
+               android:scrollbars="vertical"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@android:color/holo_orange_light"
+               android:text="Quienes somos?"
+               android:textStyle="bold"
+               android:textSize="20dp"
+               android:gravity="center"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@android:color/holo_orange_light"
+               android:textStyle="italic"
+               android:inputType="textMultiLine"
+               android:textSize="15sp"
+               android:padding="5dp"
+               android:typeface="serif"
+               android:text="Somos una comercializadora que, desde la Universidad de la plata, y en red con organizaciones sociales, comunitarias, políticas y culturales, realiza una intermediación solidaria entre las familias productoras de nuestra región y los consumidores, con el objetivo de aportar al fortalecimiento de la Economía Social y Solidaria y de fomentar el consumo responsable en los hogares platenses."
+               />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@android:color/holo_red_light"
+               android:orientation="horizontal">
+
+               <ImageButton
+                   android:id="@+id/imageButtonFacebook"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:onClick="openFacebook"
+                   android:src="@mipmap/ic_facebook_round"
+
+                   />
+
+               <ImageButton
+                   android:id="@+id/imageButtonInstagram"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:onClick="openInstagram"
+                   android:src="@mipmap/ic_instagram_round"
+
+                   />
+           </LinearLayout>
+
+
+       </LinearLayout>
+
+
+   </ScrollView>
+</FrameLayout>

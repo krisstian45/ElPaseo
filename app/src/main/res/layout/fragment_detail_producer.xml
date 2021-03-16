@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailProducerFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/textViewDetailProducerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sdsd"/>
+            <ImageView
+                android:id="@+id/imageViewDetailProducer"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/logo"
+                android:paddingRight="5dp"
+                />
+            <TextView
+                android:id="@+id/textViewDetailProducerDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+            <TextView
+                android:id="@+id/textViewDetailProducerOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sdsd"/>
+            <TextView
+                android:id="@+id/textViewDetailProducerPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
