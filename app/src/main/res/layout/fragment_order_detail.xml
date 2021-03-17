@@ -4,91 +4,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.OrderDetailFragment">
+    tools:context=".fragments.OrderDetailFragment"
+    android:background="@android:color/holo_green_light">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Carrito "
-        android:layout_margin="5dp"
-        android:padding="2dp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:background="@android:color/holo_green_light"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light"
-        android:orientation="vertical">
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Item 1                            Precio"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           >
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textAlignment="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:layout_marginBottom="5dp"
+               android:background="@android:color/holo_orange_light"
+               android:text="Carrito "
+               />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@android:color/holo_orange_light"
+               android:orientation="vertical">
 
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Distancia hacia el nodo : "/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="60 Km"
-            android:textAlignment="center"/>
-        <Button
-            android:id="@+id/btnSeeMap"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:text="Ver en Mapa"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fecha estimada de entrega : "/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="22/12/2021 "/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="Item 1                            Precio"/>
 
-    <Button
-        android:id="@+id/btnBackMain"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:backgroundTintMode="@android:color/holo_green_light"
-        android:text="Volver al Inicio"
-        android:layout_margin="5dp"/>
+           </LinearLayout>
+           <TextView
+               android:layout_marginTop="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textAlignment="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:background="@android:color/holo_orange_light"
+               android:text="Distancia hacia el nodo : "/>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:orientation="horizontal"
+               >
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="wrap_content"
+                   android:text="60 Km"
+                   android:textStyle="bold"
+                   android:textSize="25sp"
+                   android:textAlignment="center"/>
+               <Button
+                   android:id="@+id/btnSeeMap"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="wrap_content"
+                   android:text="Ver en Mapa"/>
+           </LinearLayout>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textAlignment="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:background="@android:color/holo_orange_light"
+               android:text="Fecha estimada de entrega : "/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textAlignment="center"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:background="@android:color/holo_red_light"
+               android:text="22/12/2021 "/>
+
+           <Button
+               android:id="@+id/btnBackMain"
+               android:layout_width="wrap_content"
+               android:layout_height="60dp"
+               android:layout_gravity="center"
+               android:backgroundTintMode="@android:color/holo_green_light"
+               android:text="Volver al Inicio"
+               android:layout_margin="5dp"/>
+
+       </LinearLayout>
+
+
+
+   </ScrollView>
 
 
 
