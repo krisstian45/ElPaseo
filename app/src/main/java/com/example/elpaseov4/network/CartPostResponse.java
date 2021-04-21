@@ -1,11 +1,13 @@
 package com.example.elpaseov4.network;
 
+import com.example.elpaseov4.model.Product;
 import com.example.elpaseov4.pojoModel.CartProductPojo;
 import com.example.elpaseov4.pojoModel.GeneralPojo;
 import com.example.elpaseov4.pojoModel.NodeDatePojo;
 import com.example.elpaseov4.pojoModel.NodePojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CartPostResponse implements Serializable {
     private String id;
@@ -16,6 +18,24 @@ public class CartPostResponse implements Serializable {
     private String observation;
     private String saleDate;
     private String posibleDeliveryDate;
+    private int totalElements;
+    private List<Product> page;
+
+    public int getTotalElements() {
+        return totalElements;
+    }
+
+    public void setTotalElements(int totalElements) {
+        this.totalElements = totalElements;
+    }
+
+    public List<Product> getPage() {
+        return page;
+    }
+
+    public void setPage(List<Product> page) {
+        this.page = page;
+    }
 
     public String getId() {
         return id;

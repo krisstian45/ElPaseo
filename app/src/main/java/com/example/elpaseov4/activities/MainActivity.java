@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             System.out.println("entramossssssssssssssssssssssssss");
             preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
             String value = preferences.getString("value",null);
-            service = RetrofitClientInstance.getRetrofitInstance(value).create(ServiceRetrofit.class);
+            service = RetrofitClientInstance.getRetrofitInstance().create(ServiceRetrofit.class);
         }
         inicializarElementos();
 

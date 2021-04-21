@@ -47,7 +47,7 @@ public interface ServiceRetrofit {
                   @Body CartPost newCart);
 
     @GET("/api/cart")
-    Call<List<CartPostResponse>> getCart(@Header("Authorization") String token,
+    Call<List<CartPostResponse>> getCart(@Header("Authorization:") String  token,
                                          @Query("range") String range,  // 0-10
                                          @Query("sort") String fieldsToSort, //id, desc
                                          @Query("properties") String properties);

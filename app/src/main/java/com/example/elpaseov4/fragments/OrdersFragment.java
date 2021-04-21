@@ -35,8 +35,8 @@ public class OrdersFragment extends Fragment {
 
     private TextView textView;
     private String properties = "[{\"key\": \"history\", \"value\": true}]";
-    private String range = "1,20";
-    private String fieldsTosort = "id,desc";
+        private String range = "1,20";
+        private String fieldsTosort = "id,desc";
 
     public OrdersFragment() {
         // Required empty public constructor
@@ -56,7 +56,7 @@ public class OrdersFragment extends Fragment {
         if (sesion){
             textView.setText("tenemos sesion");
 
-            service.getCart("Bearer "+obtenerToken(), range, fieldsTosort, properties).enqueue(new Callback<List<CartPostResponse>>() {
+            service.getCart("Bearer "+obtenerToken().trim(), range, fieldsTosort, properties).enqueue(new Callback<List<CartPostResponse>>() {
                 @Override
                 public void onResponse(Call<List<CartPostResponse>> call, Response<List<CartPostResponse>> response) {
                     response.body();
